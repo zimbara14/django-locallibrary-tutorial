@@ -21,4 +21,4 @@ RUN pip install -r requirements.txt
 
 # copy project
 COPY . $HOME_APP
-CMD gunicorn locallibrary.wsgi:application --bind 0.0.0.0:8000
+CMD python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --noinput --clear && gunicorn locallibrary.wsgi:application --bind 0.0.0.0:8000
